@@ -1,0 +1,14 @@
+{
+  "name": "VendNumber.js",
+  "version": "0.0.1",
+  "description": "A collection of utility methods for floating point Number operations",
+  "main": "vend-number.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vend/VendNumber.js.git"
+  },
+  "author": "Sarah Hui <sarah.a.hui@gmail.com>",
+  "dependencies": {
+    "bignumber.js": "~1.4.1"
+  }
+}
