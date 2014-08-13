@@ -1,7 +1,9 @@
 vend-number
 ----------
 
-A Vend-flavoured wrapper for [BigNumber.js](https://github.com/MikeMcl/bignumber.js/) as a node module.
+A collection of utility methods for floating point Number operations
+
+`vend-number` is vend-flavoured wrapper for [BigNumber.js](https://github.com/MikeMcl/bignumber.js/).
 
 Instead of constructing `BigNumber` objects from your numbers and performing operations on them within your app, this module provides a set of simplified math utilities that take simple `Number` or `String` types, and use `BigNumber` operations for accuracy behind the scenes.
 
