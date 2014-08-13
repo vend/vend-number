@@ -1,7 +1,10 @@
+/**
+ * @module vend-number
+ */
 (function () {
     'use strict';
 
-    var BN = BigNumber || require('bignumber.js'),
+    var BN = require('bignumber.js'),
         VendNumber;
 
     VendNumber = {
@@ -167,5 +170,7 @@
             return 0;
         }
     };
+
+    module.exports = VendNumber;
 
 }());
