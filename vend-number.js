@@ -150,7 +150,7 @@
                 returnValue = new VendNumber.VN(returnValue);
             });
 
-            $.each(values, function (key, value) {
+            values.forEach(function (value) {
                 value = parseFloat(value);
 
                 _ifValid(value, function () {
