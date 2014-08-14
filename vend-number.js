@@ -1,3 +1,4 @@
+/*global require, module*/
 /**
  * @module vend-number
  */
@@ -5,6 +6,7 @@
     'use strict';
 
     var BN = require('bignumber.js'),
+        _  = require('underscore'),
         VendNumber;
 
     VendNumber = {
@@ -60,7 +62,7 @@
          */
         add: function () {
             var values = Array.prototype.slice.call(arguments, 0);
-            return _executeOperation('plus', values);
+            return VendNumber._executeOperation('plus', values);
         },
 
         /**
@@ -70,7 +72,7 @@
          */
         subtract: function () {
             var values = Array.prototype.slice.call(arguments, 0);
-            return _executeOperation('minus', values);
+            return VendNumber._executeOperation('minus', values);
         },
 
         /**
@@ -80,7 +82,7 @@
          */
         multiply: function () {
             var values = Array.prototype.slice.call(arguments, 0);
-            return _executeOperation('times', values);
+            return VendNumber._executeOperation('times', values);
         },
 
         /**
@@ -90,7 +92,7 @@
          */
         divide: function () {
             var values = Array.prototype.slice.call(arguments, 0);
-            return _executeOperation('dividedBy', values);
+            return VendNumber._executeOperation('dividedBy', values);
         },
 
         /**
@@ -107,10 +109,12 @@
          * @return {Number} The final result or 0 if invalid.
          */
         _executeOperation: function (operation, values) {
-            var initialValue,
-                returnValue,
+            var returnValue,
                 _displayValueError,
-                _ifValid;
+                _ifValid,
+                operationAnswer;
+
+            //console.log('executing operation', operation, values);
 
             /*
              * Executes throwing a VendNumber TypeError, when any method has received an invalid value.
@@ -118,8 +122,8 @@
              *  @private
              * @method _displayValueError
              */
-            _displayValueError = function () {
-                throw new TypeError('The VendNumber method must receive a valid String or Number.');
+            _displayValueError = function (value) {
+                throw new TypeError('The VendNumber method must receive a valid String or Number. ' + value);
             };
 
             /*
@@ -137,20 +141,22 @@
                 if (!isNaN(value)) {
                     method();
                 } else {
-                    _displayValueError();
+                    _displayValueError(value);
                 }
             };
 
-            // Ensure there's a value to start operations on.
-            initialValue    = values[0];
-            values          = values.splice(0, 1);
+            // Ensure there's an initial value to start operations on.
+            returnValue = parseFloat(values[0]);
+
+            // Then remove the element at index 0.
+            values.splice(0, 1);
 
             _ifValid(returnValue, function () {
                 // Convert to VN
                 returnValue = new VendNumber.VN(returnValue);
             });
 
-            values.forEach(function (value) {
+            _.each(values, function (value) {
                 value = parseFloat(value);
 
                 _ifValid(value, function () {
@@ -162,9 +168,14 @@
             });
 
             _ifValid(returnValue, function () {
-                // Returns the result of the calculation as a standard Number.
-                return Number(returnValue.toString());
+                // Set the final result of the calculation as a standard Number.
+                operationAnswer = Number(returnValue.toString());
+                //console.log('ANSWER:', operationAnswer, '\n');
             });
+
+            if (operationAnswer) {
+                return operationAnswer;
+            }
 
             // End value was not valid so value errors will be displayed but we return 0 to continue.
             return 0;
