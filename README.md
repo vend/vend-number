@@ -39,6 +39,26 @@ Divide a list of values
 VendNumber.divide(10, 2) // 10 / 2 = 5
 ```
 
+Keep in mind when using the `VendNumber` math functions that when performing multiple calculations you will need to **make
+sure the execution order is correct**.
+
+Native JS will execute in order of **BEDMAS** automatically, whereas with these methods, you have to make sure of this manually.
+
+E.g.
+```js
+4 * 5 + 3 // returns 23
+
+multiply(4, add(5, 3)); // returns 32
+```
+
+You need to take into account the order in which the functions will be executed, so in this case it should be:
+
+```js
+4 * 5 + 3 // returns 23
+
+add(5, multiply(4, 5)); // returns 23
+```
+
 #### Rounding and formatting
 
 ```js
@@ -46,4 +66,3 @@ VendNumber.round(5.545333, 2) // "5.55"
 ```
 
 Round a value to a specified number of decimal points.
-
