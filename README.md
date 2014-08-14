@@ -46,7 +46,7 @@ Native JS will execute in order of **BEDMAS** automatically, whereas with these 
 
 E.g.
 ```js
-4 * 5 + 3 // returns 23
+4 * 5 + 3; // returns 23
 
 multiply(4, add(5, 3)); // returns 32
 ```
@@ -54,15 +54,15 @@ multiply(4, add(5, 3)); // returns 32
 You need to take into account the order in which the functions will be executed, so in this case it should be:
 
 ```js
-4 * 5 + 3 // returns 23
-
 add(5, multiply(4, 5)); // returns 23
 ```
 
 #### Rounding and formatting
 
+Round a value to a specified number of decimal points.
+
 ```js
 VendNumber.round(5.545333, 2) // "5.55"
 ```
 
-Round a value to a specified number of decimal points.
+
