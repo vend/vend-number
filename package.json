@@ -1,13 +1,13 @@
 {
   "name": "vend-number",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A collection of utility methods for floating point Number operations",
   "main": "vend-number.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/vend/vend-number.git"
   },
-  "author": "Sarah Hui <sarah.a.hui@gmail.com>",
+  "author": "Sarah Hui <sarah@vendhq.com>",
   "bugs": {
     "url": "https://github.com/vend/vend-number/issues"
   },
