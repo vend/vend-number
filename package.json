@@ -5,18 +5,27 @@
   "main": "vend-number.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/vend/VendNumber.js.git"
-  },
-  "scripts": {
-    "test": "node_modules/.bin/mocha ./test.js"
+    "url": "git://github.com/vend/vend-number.git"
   },
   "author": "Sarah Hui <sarah.a.hui@gmail.com>",
   "dependencies": {
     "bignumber.js": "~1.4.1",
     "lodash": "~2.4.1"
   },
+  "bugs": {
+    "url": "https://github.com/vend/vend-number/issues"
+  },
+  "homepage": "https://github.com/vend/vend-number",
   "devDependencies": {
     "chai": "~1.10.0",
     "mocha": "~2.0.1"
-  }
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha ./test.js"
+  },
+  "keywords": [
+    "number",
+    "math",
+    "bignumber.js"
+  ]
 }
