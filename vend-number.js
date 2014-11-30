@@ -5,19 +5,19 @@
 (function () {
     'use strict';
 
-    var BN = require('bignumber.js'),
-        _  = require('underscore'),
+    var BigNumber = require('bignumber.js'),
+        _  = require('lodash'),
         VendNumber;
 
     VendNumber = {
         /**
-         * Enhances the passed value into the BN (BigNumber) equivalent.
+         * Enhances the passed value into the BigNumber equivalent.
          *
-         * @constructor VN
+         * @constructor VendNumber
          * @param value {Number | String}
-         *      The value to make a VN
+         *      The value to make a VendNumber
          */
-        VN: function (value) {
+        VendNumber: function (value) {
             /*
              * Must toString before converting into a BigNumber.
              *
@@ -30,7 +30,7 @@
              * deal with.
              * https://github.com/MikeMcl/bignumber.js/issues/11
              */
-            return BN(value ? value.toString() : 0);
+            return BigNumber(value ? value.toString() : 0);
         },
 
         /**
@@ -46,8 +46,8 @@
          * @return {String} The rounded value.
          */
         round: function (value, decimalPoints) {
-            // Convert to VN if not already.
-            value = (value instanceof BN) ? value : new VendNumber.VN(value);
+            // Convert to VendNumber if not already.
+            value = (value instanceof BigNumber) ? value : new VendNumber.VendNumber(value);
 
             // 2dp by default.
             decimalPoints = (typeof decimalPoints === 'number') ? decimalPoints : 2;
@@ -96,12 +96,12 @@
         },
 
         /**
-         * Executes VN calculation operation on an array of values.
+         * Executes VendNumber calculation operation on an array of values.
          *
          * @private
          * @method _executeOperation
          * @param operation {String}
-         *      The operation to perform on the VN.
+         *      The operation to perform on the VendNumber.
          *
          * @param values {Array}
          *      A list of values to perform the operation on (any length).
@@ -113,8 +113,6 @@
                 _displayValueError,
                 _ifValid,
                 operationAnswer;
-
-            //console.log('executing operation', operation, values);
 
             /*
              * Executes throwing a VendNumber TypeError, when any method has received an invalid value.
@@ -152,17 +150,17 @@
             values.splice(0, 1);
 
             _ifValid(returnValue, function () {
-                // Convert to VN
-                returnValue = new VendNumber.VN(returnValue);
+                // Convert to VendNumber
+                returnValue = new VendNumber.VendNumber(returnValue);
             });
 
             _.each(values, function (value) {
                 value = parseFloat(value);
 
                 _ifValid(value, function () {
-                    // Convert to VN
-                    value = new VendNumber.VN(value);
-                    // e.g. 5.plus(2) where 5 and 2 are VN's
+                    // Convert to VendNumber
+                    value = new VendNumber.VendNumber(value);
+                    // e.g. 5.plus(2) where 5 and 2 are VendNumber's
                     returnValue = returnValue[operation](value);
                 });
             });
@@ -170,7 +168,6 @@
             _ifValid(returnValue, function () {
                 // Set the final result of the calculation as a standard Number.
                 operationAnswer = Number(returnValue.toString());
-                //console.log('ANSWER:', operationAnswer, '\n');
             });
 
             if (operationAnswer) {
