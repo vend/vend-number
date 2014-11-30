@@ -7,9 +7,16 @@
     "type": "git",
     "url": "git://github.com/vend/VendNumber.js.git"
   },
+  "scripts": {
+    "test": "node_modules/.bin/mocha ./test.js"
+  },
   "author": "Sarah Hui <sarah.a.hui@gmail.com>",
   "dependencies": {
     "bignumber.js": "~1.4.1",
     "lodash": "~2.4.1"
+  },
+  "devDependencies": {
+    "chai": "~1.10.0",
+    "mocha": "~2.0.1"
   }
 }
