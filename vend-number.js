@@ -114,8 +114,6 @@
                 _ifValid,
                 operationAnswer;
 
-            //console.log('executing operation', operation, values);
-
             /*
              * Executes throwing a VendNumber TypeError, when any method has received an invalid value.
              *
@@ -170,7 +168,6 @@
             _ifValid(returnValue, function () {
                 // Set the final result of the calculation as a standard Number.
                 operationAnswer = Number(returnValue.toString());
-                //console.log('ANSWER:', operationAnswer, '\n');
             });
 
             if (operationAnswer) {
