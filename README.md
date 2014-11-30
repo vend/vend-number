@@ -1,6 +1,8 @@
 vend-number
 ----------
 
+[![Build Status](https://travis-ci.org/vend/vend-number.svg?branch=master)](https://travis-ci.org/vend/vend-number)
+
 A collection of utility methods for floating point Number operations
 
 `vend-number` is vend-flavoured wrapper for [BigNumber.js](https://github.com/MikeMcl/bignumber.js/).
