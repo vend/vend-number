@@ -27,5 +27,6 @@
     "number",
     "math",
     "bignumber.js"
-  ]
+  ],
+  "license": "MIT"
 }
