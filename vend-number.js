@@ -6,7 +6,7 @@
     'use strict';
 
     var BN = require('bignumber.js'),
-        _  = require('underscore'),
+        _  = require('lodash'),
         VendNumber;
 
     VendNumber = {
