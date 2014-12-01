@@ -56,7 +56,7 @@ multiply(4, add(5, 3)); // returns 32
 You need to take into account the order in which the functions will be executed, so in this case it should be:
 
 ```js
-add(5, multiply(4, 5)); // returns 23
+add(3, multiply(4, 5)); // returns 23
 ```
 
 #### Rounding and formatting
