@@ -6,7 +6,6 @@
     'use strict';
 
     var BigNumber = require('bignumber.js'),
-        _  = require('lodash'),
         VendNumber;
 
     VendNumber = {
@@ -154,7 +153,7 @@
                 returnValue = new VendNumber.VendNumber(returnValue);
             });
 
-            _.each(values, function (value) {
+            values.forEach(function (value) {
                 value = parseFloat(value);
 
                 _ifValid(value, function () {
