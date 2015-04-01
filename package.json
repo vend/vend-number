@@ -22,8 +22,7 @@
     "test": "node_modules/.bin/mocha ./test.js"
   },
   "dependencies": {
-    "bignumber.js": "~1.4.1",
-    "lodash": "~2.4.1"
+    "bignumber.js": "~1.4.1"
   },
   "devDependencies": {
     "chai": "~1.10.0",
