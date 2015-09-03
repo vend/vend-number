@@ -18,11 +18,11 @@ A collection of utility methods for floating point Number operations
 
 Instead of constructing `BigNumber` objects from your numbers and performing operations on them within your app, this module provides a set of simplified math utilities that take simple `Number` or `String` types, and use `BigNumber` operations for accuracy behind the scenes.
 
-### API
+## API
 
 `VendNumber` is an object of number utilities.
 
-#### Math operations
+### Math operations
 
 The following methods can take any number of values and perform the operation on each of them in the specified order.
 
@@ -68,7 +68,7 @@ You need to take into account the order in which the functions will be executed,
 add(3, multiply(4, 5)) // returns 23
 ```
 
-#### Rounding and formatting
+### Rounding and formatting
 
 Round a value to a specified number of decimal points.
 
