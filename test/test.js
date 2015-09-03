@@ -2,7 +2,7 @@
 ;(function () {
   'use strict'
 
-  var VendNumber = require('./vend-number')
+  var VendNumber = require('../')
   var BigNumber = require('bignumber.js')
   var expect = require('chai').expect
 
