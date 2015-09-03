@@ -1,7 +1,16 @@
 vend-number
 ----------
 
-[![Build Status](https://travis-ci.org/vend/vend-number.svg?branch=master)](https://travis-ci.org/vend/vend-number)
+[![travis][travis-image]][travis-url]
+[![npm][npm-image]][npm-url]
+[![js-standard-style][standard-style-image]][standard-style-url]
+
+[travis-image]: https://img.shields.io/travis/vend/vend-number.svg?style=flat
+[travis-url]: https://travis-ci.org/vend/vend-number
+[npm-image]: https://img.shields.io/npm/v/vend-number.svg?style=flat
+[npm-url]: https://npmjs.org/package/vend-number
+[standard-style-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat
+[standard-style-url]: https://github.com/feross/standard
 
 A collection of utility methods for floating point Number operations
 
@@ -9,11 +18,11 @@ A collection of utility methods for floating point Number operations
 
 Instead of constructing `BigNumber` objects from your numbers and performing operations on them within your app, this module provides a set of simplified math utilities that take simple `Number` or `String` types, and use `BigNumber` operations for accuracy behind the scenes.
 
-### API
+## API
 
 `VendNumber` is an object of number utilities.
 
-#### Math operations
+### Math operations
 
 The following methods can take any number of values and perform the operation on each of them in the specified order.
 
@@ -48,18 +57,18 @@ Native JS will execute in order of **BEDMAS** automatically, whereas with these 
 
 E.g.
 ```js
-4 * 5 + 3; // returns 23
+4 * 5 + 3 // returns 23
 
-multiply(4, add(5, 3)); // returns 32
+multiply(4, add(5, 3)) // returns 32
 ```
 
 You need to take into account the order in which the functions will be executed, so in this case it should be:
 
 ```js
-add(3, multiply(4, 5)); // returns 23
+add(3, multiply(4, 5)) // returns 23
 ```
 
-#### Rounding and formatting
+### Rounding and formatting
 
 Round a value to a specified number of decimal points.
 
@@ -67,4 +76,28 @@ Round a value to a specified number of decimal points.
 VendNumber.round(5.545333, 2) // "5.55"
 ```
 
+## Contributing
 
+### Build
+
+```js
+npm run build
+```
+
+### Test
+
+```js
+npm test
+```
+
+### Watch
+
+To watch for changes, build them and run the tests:
+
+```js
+npm run watch
+```
+
+## License
+
+MIT © [Vend](github.com/vend)
