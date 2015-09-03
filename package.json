@@ -22,8 +22,7 @@
     "test": "node_modules/.bin/mocha ./test.js"
   },
   "dependencies": {
-    "bignumber.js": "~1.4.1",
-    "module-gulp.js": "git+ssh://git@github.com/vend/module-gulp.js.git#v3.5.0"
+    "bignumber.js": "~1.4.1"
   },
   "devDependencies": {
     "chai": "~1.10.0",
