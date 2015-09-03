@@ -27,7 +27,7 @@ const VendNumber = {
      * deal with.
      * https://github.com/MikeMcl/bignumber.js/issues/11
      */
-    return BigNumber(value ? value.toString() : 0)
+    return new BigNumber(value ? value.toString() : 0)
   },
 
   /**

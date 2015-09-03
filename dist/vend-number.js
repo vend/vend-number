@@ -35,7 +35,7 @@ var VendNumber = {
      * deal with.
      * https://github.com/MikeMcl/bignumber.js/issues/11
      */
-    return (0, _bignumberJs2['default'])(value ? value.toString() : 0);
+    return new _bignumberJs2['default'](value ? value.toString() : 0);
   },
 
   /**
