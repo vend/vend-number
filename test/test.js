@@ -1,7 +1,7 @@
 /*global require, describe, it */
 'use strict'
 
-import VendNumber, { vn, round, add, subtract, multiply, divide } from '../'
+import VendNumber, { vn, round, add, subtract, multiply, divide, isFinite } from '../'
 import BigNumber from 'bignumber.js'
 import { expect } from 'chai'
 
@@ -184,6 +184,11 @@ describe('VendNumber', () => {
       expect(add(-1234, -1234)).to.equal(-2468)
     })
 
+    it('should add zero correctly', () => {
+      expect(add(2.57, 0)).to.equal(2.57)
+      expect(add(0, 2.57)).to.equal(2.57)
+    })
+
     it('should throw an error if a falsy is passed as an argument', () => {
       expect(() => add(null)).to.throw(Error)
       expect(() => add(null, 1)).to.throw(Error)
@@ -238,6 +243,11 @@ describe('VendNumber', () => {
       expect(subtract(-1, 6)).to.equal(-7)
       expect(subtract(-1, -6)).to.equal(5)
       expect(subtract(-1234, -1234)).to.equal(0)
+    })
+
+    it('should subtract zero correctly', () => {
+      expect(subtract(2.57, 0)).to.equal(2.57)
+      expect(subtract(0, 2.57)).to.equal(-2.57)
     })
 
     it('should throw an error if a falsy is passed as an argument', () => {
@@ -296,6 +306,11 @@ describe('VendNumber', () => {
       expect(multiply(-1234, -1234)).to.equal(1522756)
     })
 
+    it('should multiply zero correctly', () => {
+      expect(multiply(2.57, 0)).to.equal(0)
+      expect(multiply(0, 2.57)).to.equal(0)
+    })
+
     it('should throw an error if a falsy is passed as an argument', () => {
       expect(() => multiply(null)).to.throw(Error)
       expect(() => multiply(null, 1)).to.throw(Error)
@@ -349,6 +364,11 @@ describe('VendNumber', () => {
       expect(divide(-1234, -1234)).to.equal(1)
     })
 
+    it('should divide zero correctly', () => {
+      expect(divide(2.57, 0)).to.equal(Infinity)
+      expect(divide(0, 2.57)).to.equal(0)
+    })
+
     it('should throw an error if a falsy is passed as an argument', () => {
       expect(() => divide(undefined, 2)).to.throw(Error)
       expect(() => divide(null)).to.throw(Error)
@@ -385,6 +405,48 @@ describe('VendNumber', () => {
       divide(testVendNumberValue, testNumberValue)
       expect(testVendNumberValue).to.be.an.instanceof(BigNumber)
       expect(testNumberValue).to.be.a('number')
+    })
+  })
+
+  describe('#isFinite', () => {
+    it('should return false for non-numeric values', () => {
+      expect(isFinite(undefined)).to.be.false
+      expect(isFinite(null)).to.be.false
+      expect(isFinite(NaN)).to.be.false
+      expect(isFinite(false)).to.be.false
+      expect(isFinite('')).to.be.false
+      expect(isFinite('not a number')).to.be.false
+    })
+
+    it('should return true for finite numbers represented as strings', () => {
+      expect(isFinite('0')).to.be.true
+      expect(isFinite('123.45')).to.be.true
+      expect(isFinite('-123.45')).to.be.true
+      expect(isFinite(Number.MAX_VALUE.toString())).to.be.true
+      expect(isFinite(Number.MIN_VALUE.toString())).to.be.true
+    })
+
+    it('should return true for finite number values', () => {
+      expect(isFinite(0)).to.be.true
+      expect(isFinite(123.45)).to.be.true
+      expect(isFinite(-123.45)).to.be.true
+      expect(isFinite(Number.MAX_VALUE)).to.be.true
+      expect(isFinite(Number.MIN_VALUE)).to.be.true
+    })
+
+    it('should return true for finite VendNumber values', () => {
+      expect(isFinite(vn(0))).to.be.true
+      expect(isFinite(vn(123.45))).to.be.true
+      expect(isFinite(vn(-123.45))).to.be.true
+      expect(isFinite(vn(Number.MAX_VALUE))).to.be.true
+      expect(isFinite(vn(Number.MIN_VALUE))).to.be.true
+    })
+
+    it('should return false for Infinity or -Infinity', () => {
+      expect(isFinite(Infinity)).to.be.false
+      expect(isFinite(Number.POSITIVE_INFINITY)).to.be.false
+      expect(isFinite(-Infinity)).to.be.false
+      expect(isFinite(Number.NEGATIVE_INFINITY)).to.be.false
     })
   })
 })
