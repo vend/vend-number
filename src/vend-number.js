@@ -195,6 +195,18 @@ function _executeOperation (operation, values) {
 
 const SafeBN = BigNumber.another({ ERRORS: false })
 
+/**
+ * Determines whether the given value is a finite numeric value.
+ *
+ * @method isFinite
+ * @static
+ *
+ * @param  {Any} value
+ *         The value to test as a finite Number
+ *
+ * @return {Boolean} true if the value is a finite numeric value (can be Number, String, BigNumber) or false if it is
+ *         non-numeric or non-finite
+ */
 VendNumber.isFinite = function (value) {
   return SafeBN(value).isFinite()
 }

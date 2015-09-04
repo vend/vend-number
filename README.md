@@ -94,6 +94,20 @@ Round a value to a specified number of decimal points.
 VendNumber.round(5.545333, 2) // "5.55"
 ```
 
+### isFinite
+
+A static equivalent to `BigNumber.isFinite` that reports `false` for non-numeric values.
+
+```js
+VendNumber.isFinite(null) // false
+VendNumber.isFinite('') // false
+VendNumber.isFinite(Infinity) // false
+
+VendNumber.isFinite(0) // true
+VendNumber.isFinite(Number.MAX_VALUE) // true
+VendNumber.isFinite('-123.456') // true
+```
+
 ## Contributing
 
 ### Build
