@@ -9,13 +9,6 @@ Object.defineProperty(exports, '__esModule', {
 
 var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-exports.vn = vn;
-exports.round = round;
-exports.add = add;
-exports.subtract = subtract;
-exports.multiply = multiply;
-exports.divide = divide;
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -73,10 +66,9 @@ var VendNumber = (function (_BigNumber) {
 })(_bignumberJs2['default']);
 
 exports['default'] = VendNumber;
-
-function vn(value) {
+VendNumber.vn = function (value) {
   return new VendNumber(value);
-}
+};
 
 /**
  * Rounds a value to a specified number of decimal points.
@@ -92,8 +84,7 @@ function vn(value) {
  *
  * @return {String} The rounded value.
  */
-
-function round(value, decimalPoints) {
+VendNumber.round = function (value, decimalPoints) {
   // Convert to VendNumber if not already.
   value = value instanceof _bignumberJs2['default'] ? value : new VendNumber(value);
 
@@ -101,7 +92,7 @@ function round(value, decimalPoints) {
   decimalPoints = typeof decimalPoints === 'number' ? decimalPoints : 2;
 
   return value.toFixed(decimalPoints);
-}
+};
 
 /**
  * Adds a list of values.
@@ -109,14 +100,13 @@ function round(value, decimalPoints) {
  * @method add
  * @static
  */
-
-function add() {
+VendNumber.add = function () {
   for (var _len = arguments.length, values = Array(_len), _key = 0; _key < _len; _key++) {
     values[_key] = arguments[_key];
   }
 
   return _executeOperation('plus', values);
-}
+};
 
 /**
  * Subtracts a list of values.
@@ -124,14 +114,13 @@ function add() {
  * @method subtract
  * @static
  */
-
-function subtract() {
+VendNumber.subtract = function () {
   for (var _len2 = arguments.length, values = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
     values[_key2] = arguments[_key2];
   }
 
   return _executeOperation('minus', values);
-}
+};
 
 /**
  * Multiplies a list of values.
@@ -139,14 +128,13 @@ function subtract() {
  * @method multiply
  * @static
  */
-
-function multiply() {
+VendNumber.multiply = function () {
   for (var _len3 = arguments.length, values = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
     values[_key3] = arguments[_key3];
   }
 
   return _executeOperation('times', values);
-}
+};
 
 /**
  * Divides a list of values.
@@ -154,14 +142,13 @@ function multiply() {
  * @method divide
  * @static
  */
-
-function divide() {
+VendNumber.divide = function () {
   for (var _len4 = arguments.length, values = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
     values[_key4] = arguments[_key4];
   }
 
   return _executeOperation('dividedBy', values);
-}
+};
 
 /**
  * Executes VendNumber calculation operation on an array of values.
@@ -243,3 +230,4 @@ function _executeOperation(operation, values) {
   // End value was not valid so value errors will be displayed but we return 0 to continue.
   return 0;
 }
+module.exports = exports['default'];

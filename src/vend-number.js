@@ -44,7 +44,7 @@ export default class VendNumber extends BigNumber {
  *
  * @return {VendNumber} A VendNumber instance for the given value
  */
-export function vn (value) {
+VendNumber.vn = function (value) {
   return new VendNumber(value)
 }
 
@@ -62,7 +62,7 @@ export function vn (value) {
  *
  * @return {String} The rounded value.
  */
-export function round (value, decimalPoints) {
+VendNumber.round = function (value, decimalPoints) {
   // Convert to VendNumber if not already.
   value = (value instanceof BigNumber) ? value : new VendNumber(value)
 
@@ -78,7 +78,7 @@ export function round (value, decimalPoints) {
  * @method add
  * @static
  */
-export function add (...values) {
+VendNumber.add = function (...values) {
   return _executeOperation('plus', values)
 }
 
@@ -88,7 +88,7 @@ export function add (...values) {
  * @method subtract
  * @static
  */
-export function subtract (...values) {
+VendNumber.subtract = function (...values) {
   return _executeOperation('minus', values)
 }
 
@@ -98,7 +98,7 @@ export function subtract (...values) {
  * @method multiply
  * @static
  */
-export function multiply (...values) {
+VendNumber.multiply = function (...values) {
   return _executeOperation('times', values)
 }
 
@@ -108,7 +108,7 @@ export function multiply (...values) {
  * @method divide
  * @static
  */
-export function divide (...values) {
+VendNumber.divide = function (...values) {
   return _executeOperation('dividedBy', values)
 }
 

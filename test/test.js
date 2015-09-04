@@ -9,6 +9,17 @@ describe('VendNumber', () => {
   const testVendNumberValue = vn(10)
   const testNumberValue = 2
 
+  it('should support being imported by require()', () => {
+    const VendNum = require('../')
+    expect(VendNum).to.equal(VendNumber)
+    expect(VendNum.vn).to.equal(vn)
+    expect(VendNum.round).to.equal(round)
+    expect(VendNum.add).to.equal(add)
+    expect(VendNum.subtract).to.equal(subtract)
+    expect(VendNum.multiply).to.equal(multiply)
+    expect(VendNum.divide).to.equal(divide)
+  })
+
   it('should be a constructor function', () => {
     expect(VendNumber).to.be.a('function')
     expect(new VendNumber(0)).to.be.an.instanceof(VendNumber)
