@@ -7,7 +7,15 @@
     "type": "git",
     "url": "git://github.com/vend/vend-number.git"
   },
-  "author": "Sarah Hui <sarah@vendhq.com>",
+  "contributors": [{
+    "name": "Sarah Hui",
+    "email": "sarah@vendhq.com",
+    "url": "https://github.com/sehsarah"
+  }, {
+    "name": "James Bunt",
+    "email": "james@vendhq.com",
+    "url": "https://github.com/unkillbob"
+  }],
   "bugs": {
     "url": "https://github.com/vend/vend-number/issues"
   },
