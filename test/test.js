@@ -1,26 +1,60 @@
 /*global require, describe, it */
 'use strict'
 
-import { VendNumber, round, add, subtract, multiply, divide } from '../'
+import VendNumber, { vn, round, add, subtract, multiply, divide } from '../'
 import BigNumber from 'bignumber.js'
 import { expect } from 'chai'
 
 describe('VendNumber', () => {
-  const testVendNumberValue = VendNumber(10)
+  const testVendNumberValue = vn(10)
   const testNumberValue = 2
 
-  describe('#VendNumber', () => {
+  it('should support being imported by require()', () => {
+    const VendNum = require('../')
+    expect(VendNum).to.equal(VendNumber)
+    expect(VendNum.vn).to.equal(vn)
+    expect(VendNum.round).to.equal(round)
+    expect(VendNum.add).to.equal(add)
+    expect(VendNum.subtract).to.equal(subtract)
+    expect(VendNum.multiply).to.equal(multiply)
+    expect(VendNum.divide).to.equal(divide)
+  })
+
+  it('should be a constructor function', () => {
+    expect(VendNumber).to.be.a('function')
+    expect(new VendNumber(0)).to.be.an.instanceof(VendNumber)
+  })
+
+  it('should enhance the passed value into a BigNumber', () => {
+    expect(new VendNumber(1.005)).to.be.an.instanceof(BigNumber)
+    expect(new VendNumber(-1.005)).to.be.an.instanceof(BigNumber)
+  })
+
+  it('should return 0 for all falsy values', () => {
+    expect(new VendNumber(null).valueOf()).to.equal('0')
+    expect(new VendNumber(undefined).valueOf()).to.equal('0')
+    expect(new VendNumber(NaN).valueOf()).to.equal('0')
+    expect(new VendNumber(false).valueOf()).to.equal('0')
+    expect(new VendNumber('').valueOf()).to.equal('0')
+  })
+
+  describe('#vn', () => {
+    it('should enhance the passed value into a VendNumber', () => {
+      expect(vn(1.005)).to.be.an.instanceof(VendNumber)
+      expect(vn(-1.005)).to.be.an.instanceof(VendNumber)
+    })
+
     it('should enhance the passed value into a BigNumber', () => {
-      expect(VendNumber(1.005)).to.be.an.instanceof(BigNumber)
-      expect(VendNumber(-1.005)).to.be.an.instanceof(BigNumber)
+      expect(vn(1.005)).to.be.an.instanceof(BigNumber)
+      expect(vn(-1.005)).to.be.an.instanceof(BigNumber)
     })
 
     it('should return 0 for all falsy values', () => {
-      expect(VendNumber(null).valueOf()).to.equal('0')
-      expect(VendNumber(undefined).valueOf()).to.equal('0')
-      expect(VendNumber(NaN).valueOf()).to.equal('0')
-      expect(VendNumber(false).valueOf()).to.equal('0')
-      expect(VendNumber('').valueOf()).to.equal('0')
+      expect(vn(null).valueOf()).to.equal('0')
+      expect(vn(undefined).valueOf()).to.equal('0')
+      expect(vn(NaN).valueOf()).to.equal('0')
+      expect(vn(false).valueOf()).to.equal('0')
+      expect(vn('').valueOf()).to.equal('0')
     })
   })
 
@@ -184,9 +218,9 @@ describe('VendNumber', () => {
     })
 
     it('should accept VendNumber as a parameter', () => {
-      expect(add(VendNumber(10), VendNumber(5))).to.equal(15)
-      expect(add(VendNumber(-10), 5)).to.equal(-5)
-      expect(add(-10, VendNumber(5))).to.equal(-5)
+      expect(add(vn(10), vn(5))).to.equal(15)
+      expect(add(vn(-10), 5)).to.equal(-5)
+      expect(add(-10, vn(5))).to.equal(-5)
     })
 
     it("shouldn't change the type of the parameters", () => {
@@ -240,9 +274,9 @@ describe('VendNumber', () => {
     })
 
     it('should accept VendNumber as a parameter', () => {
-      expect(subtract(VendNumber(10), VendNumber(5))).to.equal(5)
-      expect(subtract(VendNumber(-10), 5)).to.equal(-15)
-      expect(subtract(-10, VendNumber(5))).to.equal(-15)
+      expect(subtract(vn(10), vn(5))).to.equal(5)
+      expect(subtract(vn(-10), 5)).to.equal(-15)
+      expect(subtract(-10, vn(5))).to.equal(-15)
     })
 
     it("shouldn't change the type of the parameters", () => {
@@ -296,9 +330,9 @@ describe('VendNumber', () => {
     })
 
     it('should accept VendNumber as a parameter', () => {
-      expect(multiply(VendNumber(10), VendNumber(5))).to.equal(50)
-      expect(multiply(VendNumber(-10), 5)).to.equal(-50)
-      expect(multiply(-10, VendNumber(5))).to.equal(-50)
+      expect(multiply(vn(10), vn(5))).to.equal(50)
+      expect(multiply(vn(-10), 5)).to.equal(-50)
+      expect(multiply(-10, vn(5))).to.equal(-50)
     })
 
     it("shouldn't change the type of the parameters", () => {
@@ -342,9 +376,9 @@ describe('VendNumber', () => {
     })
 
     it('should accept VendNumber as a parameter', () => {
-      expect(divide(VendNumber(10), VendNumber(5))).to.equal(2)
-      expect(divide(VendNumber(-10), 5)).to.equal(-2)
-      expect(divide(-10, VendNumber(5))).to.equal(-2)
+      expect(divide(vn(10), vn(5))).to.equal(2)
+      expect(divide(vn(-10), 5)).to.equal(-2)
+      expect(divide(-10, vn(5))).to.equal(-2)
     })
 
     it("shouldn't change the type of the parameters", () => {
