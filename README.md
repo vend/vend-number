@@ -14,17 +14,35 @@ vend-number
 
 A collection of utility methods for floating point Number operations
 
-`vend-number` is vend-flavoured wrapper for [BigNumber.js](https://github.com/MikeMcl/bignumber.js/).
+`vend-number` is a vend-flavoured wrapper for [BigNumber.js](https://github.com/MikeMcl/bignumber.js/).
 
 Instead of constructing `BigNumber` objects from your numbers and performing operations on them within your app, this module provides a set of simplified math utilities that take simple `Number` or `String` types, and use `BigNumber` operations for accuracy behind the scenes.
 
 ## API
 
-`VendNumber` is an object of number utilities.
+`VendNumber` is an extension of the `BigNumber` class.
+
+```js
+import VendNumber from 'vend-number'
+
+const num = new VendNumber('123.456')
+num.round(2) // '123.46'
+num instanceof BigNumber // true
+```
+
+There is a shortcut method of construction in `VendNumber.vn`:
+
+```js
+import VendNumber, { vn } from 'vend-number'
+
+const num = vn(123.456)
+num.round(2) // '123.46'
+num instanceof VendNumber // true
+```
 
 ### Math operations
 
-The following methods can take any number of values and perform the operation on each of them in the specified order.
+The following static methods can take any number of values and perform the operation on each of them in the specified order.
 
 Add a list of values
 
