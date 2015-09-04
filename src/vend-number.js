@@ -192,3 +192,9 @@ function _executeOperation (operation, values) {
   // End value was not valid so value errors will be displayed but we return 0 to continue.
   return 0
 }
+
+const SafeBN = BigNumber.another({ ERRORS: false })
+
+VendNumber.isFinite = function (value) {
+  return SafeBN(value).isFinite()
+}

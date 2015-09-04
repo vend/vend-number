@@ -1,7 +1,7 @@
 /*global require, describe, it */
 'use strict'
 
-import VendNumber, { vn, round, add, subtract, multiply, divide } from '../'
+import VendNumber, { vn, round, add, subtract, multiply, divide, isFinite } from '../'
 import BigNumber from 'bignumber.js'
 import { expect } from 'chai'
 
@@ -385,6 +385,45 @@ describe('VendNumber', () => {
       divide(testVendNumberValue, testNumberValue)
       expect(testVendNumberValue).to.be.an.instanceof(BigNumber)
       expect(testNumberValue).to.be.a('number')
+    })
+  })
+
+  describe('#isFinite', () => {
+    it('should return false for non-numeric values', () => {
+      expect(isFinite(undefined)).to.be.false
+      expect(isFinite(null)).to.be.false
+      expect(isFinite(NaN)).to.be.false
+      expect(isFinite(false)).to.be.false
+      expect(isFinite('')).to.be.false
+      expect(isFinite('not a number')).to.be.false
+    })
+
+    it('should return true for finite numbers represented as strings', () => {
+      expect(isFinite('123.45')).to.be.true
+      expect(isFinite('-123.45')).to.be.true
+      expect(isFinite(Number.MAX_VALUE.toString())).to.be.true
+      expect(isFinite(Number.MIN_VALUE.toString())).to.be.true
+    })
+
+    it('should return true for finite number values', () => {
+      expect(isFinite(123.45)).to.be.true
+      expect(isFinite(-123.45)).to.be.true
+      expect(isFinite(Number.MAX_VALUE)).to.be.true
+      expect(isFinite(Number.MIN_VALUE)).to.be.true
+    })
+
+    it('should return true for finite VendNumber values', () => {
+      expect(isFinite(vn(123.45))).to.be.true
+      expect(isFinite(vn(-123.45))).to.be.true
+      expect(isFinite(vn(Number.MAX_VALUE))).to.be.true
+      expect(isFinite(vn(Number.MIN_VALUE))).to.be.true
+    })
+
+    it('should return false for Infinity or -Infinity', () => {
+      expect(isFinite(Infinity)).to.be.false
+      expect(isFinite(Number.POSITIVE_INFINITY)).to.be.false
+      expect(isFinite(-Infinity)).to.be.false
+      expect(isFinite(Number.NEGATIVE_INFINITY)).to.be.false
     })
   })
 })

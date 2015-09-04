@@ -230,4 +230,10 @@ function _executeOperation(operation, values) {
   // End value was not valid so value errors will be displayed but we return 0 to continue.
   return 0;
 }
+
+var SafeBN = _bignumberJs2['default'].another({ ERRORS: false });
+
+VendNumber.isFinite = function (value) {
+  return SafeBN(value).isFinite();
+};
 module.exports = exports['default'];
