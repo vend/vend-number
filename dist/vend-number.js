@@ -165,18 +165,8 @@ VendNumber.divide = function () {
  * @return {Number} The final result or 0 if invalid.
  */
 function _executeOperation(operation, values) {
-  /*
-   * Executes throwing a VendNumber TypeError, when any method has received an invalid value.
-   *
-   * @private
-   * @method _displayValueError
-   */
-  function _displayValueError(value) {
-    throw new TypeError('The VendNumber method must receive a valid String or Number. ' + value);
-  }
-
-  /*
-   * Run passed method if value passed is not NaN, otherwise display value error.
+  /**
+   * Run passed method if value passed is not NaN, otherwise throw a TypeError.
    *
    * @private
    * @method _ifValid
@@ -191,7 +181,7 @@ function _executeOperation(operation, values) {
     if (!isNaN(value)) {
       method();
     } else {
-      _displayValueError(value);
+      throw new TypeError('The VendNumber method must receive a valid String or Number. ' + value);
     }
   }
 
@@ -201,9 +191,9 @@ function _executeOperation(operation, values) {
   // Then remove the element at index 0.
   values.splice(0, 1);
 
+  // Convert to VendNumber
   _ifValid(returnValue, function () {
-    // Convert to VendNumber
-    returnValue = new VendNumber(returnValue);
+    return returnValue = new VendNumber(returnValue);
   });
 
   values.forEach(function (value) {
@@ -218,9 +208,9 @@ function _executeOperation(operation, values) {
   });
 
   var operationAnswer = undefined;
+  // Set the final result of the calculation as a standard Number.
   _ifValid(returnValue, function () {
-    // Set the final result of the calculation as a standard Number.
-    operationAnswer = Number(returnValue.toString());
+    return operationAnswer = Number(returnValue.toString());
   });
 
   if (operationAnswer) {

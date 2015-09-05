@@ -12,7 +12,9 @@ vend-number
 [standard-style-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat
 [standard-style-url]: https://github.com/feross/standard
 
-A collection of utility methods for floating point Number operations
+> A collection of utility methods for floating point Number operations
+
+![numbers](https://media.giphy.com/media/kJgJEc8TOiLra/giphy.gif)
 
 `vend-number` is a vend-flavoured wrapper for [BigNumber.js](https://github.com/MikeMcl/bignumber.js/).
 
