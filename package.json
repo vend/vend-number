@@ -1,29 +1,34 @@
 {
   "name": "vend-number",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "A collection of utility methods for floating point Number operations",
   "main": "dist/vend-number.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/vend/vend-number.git"
   },
-  "contributors": [{
-    "name": "Sarah Hui",
-    "email": "sarah@vendhq.com",
-    "url": "https://github.com/sehsarah"
-  }, {
-    "name": "Chris Greeff",
-    "email": "chris.greeff@vendhq.com",
-    "url": "https://github.com/chrisgreeff"
-  }, {
-    "name": "Nick Lockhart",
-    "email": "nick.lockhart@vendhq.com",
-    "url": "https://github.com/N1ck"
-  }, {
-    "name": "James Bunt",
-    "email": "james@vendhq.com",
-    "url": "https://github.com/unkillbob"
-  }],
+  "contributors": [
+    {
+      "name": "Sarah Hui",
+      "email": "sarah@vendhq.com",
+      "url": "https://github.com/sehsarah"
+    },
+    {
+      "name": "Chris Greeff",
+      "email": "chris.greeff@vendhq.com",
+      "url": "https://github.com/chrisgreeff"
+    },
+    {
+      "name": "Nick Lockhart",
+      "email": "nick.lockhart@vendhq.com",
+      "url": "https://github.com/N1ck"
+    },
+    {
+      "name": "James Bunt",
+      "email": "james@vendhq.com",
+      "url": "https://github.com/unkillbob"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/vend/vend-number/issues"
   },
