@@ -7,7 +7,7 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -148,6 +148,34 @@ VendNumber.divide = function () {
   }
 
   return _executeOperation('dividedBy', values);
+};
+
+/**
+ * Returns the sum of all items in the collection based on property.
+ *
+ * @method sumBy
+ *
+ * @param {Collection} collection
+ *        A collection of items to loop through.
+ *
+ * @param {String} property
+ *        A property name to use for calculating the sum.
+ *
+ * @param {Number} decimalPoints
+ *        The number of decimal points to round the value to.
+ *
+ * @return {Number} the total of all items in the collection based on property.
+ */
+VendNumber.sumBy = function (collection, property, decimalPoints) {
+  var sum = 0;
+  if (collection && collection instanceof Array) {
+    collection.forEach(function (item) {
+      if (item && VendNumber.isFinite(item[property])) {
+        sum = VendNumber.add(sum, item[property]);
+      }
+    });
+  }
+  return VendNumber.round(sum, decimalPoints);
 };
 
 /**
