@@ -110,6 +110,24 @@ VendNumber.isFinite(Number.MAX_VALUE) // true
 VendNumber.isFinite('-123.456') // true
 ```
 
+### sumBy
+
+Calculates the sum of all items in a collection based on a property name.
+
+Accepts the following parameters: 
+
+  - `Array` an array of items to loop through.
+  - `String` a property name to sum by.
+  - `Number` an optional decimal points number to round the sum value to (defaults to 2 d.p.).
+
+**Example**:
+
+```js
+VendNumber.sumBy([], '') // 0.00
+VendNumber.sumBy([{ a: 1 }, { a: 2 }], 'a') // 3.00
+VendNumber.sumBy([{ a: 1.4222 }, { a: 2.1115 }], 'a', 3) // 3.534
+```
+
 ## Contributing
 
 ### Build
