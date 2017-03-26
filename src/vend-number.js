@@ -113,6 +113,34 @@ VendNumber.divide = function (...values) {
 }
 
 /**
+ * Returns the sum of all items in the collection based on property.
+ *
+ * @method sumBy
+ *
+ * @param {Array} collection
+ *        A collection of items to loop through.
+ *
+ * @param {String} property
+ *        A property name to use for calculating the sum.
+ *
+ * @param {Number} [decimalPoints]
+ *        The number of decimal points to round the value to (defaults to 2 decimal points).
+ *
+ * @return {Number} the total of all items in the collection based on property.
+ */
+VendNumber.sumBy = function (collection, property, decimalPoints) {
+  let sum = 0
+  if (collection && collection instanceof Array) {
+    collection.forEach(item => {
+      if (item && VendNumber.isFinite(item[property])) {
+        sum = VendNumber.add(sum, item[property])
+      }
+    })
+  }
+  return VendNumber.round(sum, decimalPoints)
+}
+
+/**
  * Executes VendNumber calculation operation on an array of values.
  *
  * @private

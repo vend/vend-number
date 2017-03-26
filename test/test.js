@@ -1,7 +1,7 @@
 /*global require, describe, it */
 'use strict'
 
-import VendNumber, { vn, round, add, subtract, multiply, divide, isFinite } from '../'
+import VendNumber, { vn, round, add, subtract, multiply, divide, isFinite, sumBy } from '../'
 import BigNumber from 'bignumber.js'
 import { expect } from 'chai'
 
@@ -405,6 +405,28 @@ describe('VendNumber', () => {
       divide(testVendNumberValue, testNumberValue)
       expect(testVendNumberValue).to.be.an.instanceof(BigNumber)
       expect(testNumberValue).to.be.a('number')
+    })
+  })
+
+  describe('#sumBy', () => {
+    it('should return 0.00 for non-numeric values', () => {
+      expect(sumBy(['word'], 'a')).to.equal('0.00')
+      expect(sumBy([], 'a')).to.equal('0.00')
+      expect(sumBy(undefined, 'a')).to.equal('0.00')
+      expect(sumBy(null, 'a')).to.equal('0.00')
+      expect(sumBy([true], 'a')).to.equal('0.00')
+      expect(sumBy([null], 'a')).to.equal('0.00')
+      expect(sumBy([{}], 'a')).to.equal('0.00')
+    })
+
+    it('should return 0.00 for invalid property values', () => {
+      expect(sumBy([{ num: 1 }, { num: 2 }], 'X', 2)).to.equal('0.00')
+    })
+
+    it('should return the sum rounded to x decimal points for numeric values', () => {
+      expect(sumBy([{ num: 1 }, { num: 2 }], 'num', 5)).to.equal('3.00000')
+      expect(sumBy([{ num: 10 }, { num: 2.156 }], 'num', 2)).to.equal('12.16')
+      expect(sumBy([{ num: 1.1111 }, { num: 1.1443 }], 'num', 3)).to.equal('2.255')
     })
   })
 
