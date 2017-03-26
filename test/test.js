@@ -410,13 +410,13 @@ describe('VendNumber', () => {
 
   describe('#sumBy', () => {
     it('should return 0.00 for non-numeric values', () => {
-      expect(sumBy(['word'], 'a', 1)).to.equal('0.0')
-      expect(sumBy([], 'a', 1)).to.equal('0.0')
-      expect(sumBy(undefined, 'a', 1)).to.equal('0.0')
-      expect(sumBy(null, 'a', 1)).to.equal('0.0')
-      expect(sumBy([true], 'a', 1)).to.equal('0.0')
-      expect(sumBy([null], 'a', 1)).to.equal('0.0')
-      expect(sumBy([{}], 'a', 1)).to.equal('0.0')
+      expect(sumBy(['word'], 'a')).to.equal('0.00')
+      expect(sumBy([], 'a')).to.equal('0.00')
+      expect(sumBy(undefined, 'a')).to.equal('0.00')
+      expect(sumBy(null, 'a')).to.equal('0.00')
+      expect(sumBy([true], 'a')).to.equal('0.00')
+      expect(sumBy([null], 'a')).to.equal('0.00')
+      expect(sumBy([{}], 'a')).to.equal('0.00')
     })
 
     it('should return 0.00 for invalid property values', () => {

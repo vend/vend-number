@@ -117,14 +117,14 @@ VendNumber.divide = function (...values) {
  *
  * @method sumBy
  *
- * @param {Collection} collection
+ * @param {Array} collection
  *        A collection of items to loop through.
  *
  * @param {String} property
  *        A property name to use for calculating the sum.
  *
- * @param {Number} decimalPoints
- *        The number of decimal points to round the value to.
+ * @param {Number} [decimalPoints]
+ *        The number of decimal points to round the value to (defaults to 2 decimal points).
  *
  * @return {Number} the total of all items in the collection based on property.
  */
