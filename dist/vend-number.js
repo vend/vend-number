@@ -7,7 +7,7 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x3, _x4, _x5) { var _again = true; _function: while (_again) { var object = _x3, property = _x4, receiver = _x5; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x3 = parent; _x4 = property; _x5 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -82,16 +82,20 @@ VendNumber.vn = function (value) {
  * @param [decimalPoints=2]
  *        The number of decimal points to round the passed value to, or two.
  *
+ * @param [roundingMode=BigNumber.ROUND_HALF_UP]
+ *        The required rounding mode. Defaults to ROUND_HALF_UP (4).
+ *        See https://mikemcl.github.io/bignumber.js/#round-up for other rounding modes
+ *
  * @return {String} The rounded value.
  */
-VendNumber.round = function (value, decimalPoints) {
+VendNumber.round = function (value) {
+  var decimalPoints = arguments.length <= 1 || arguments[1] === undefined ? 2 : arguments[1];
+  var roundingMode = arguments.length <= 2 || arguments[2] === undefined ? _bignumberJs2['default'].ROUND_HALF_UP : arguments[2];
+
   // Convert to VendNumber if not already.
   value = value instanceof _bignumberJs2['default'] ? value : new VendNumber(value);
 
-  // 2dp by default.
-  decimalPoints = typeof decimalPoints === 'number' ? decimalPoints : 2;
-
-  return value.toFixed(decimalPoints);
+  return value.toFixed(decimalPoints, roundingMode);
 };
 
 /**

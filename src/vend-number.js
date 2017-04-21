@@ -60,16 +60,17 @@ VendNumber.vn = function (value) {
  * @param [decimalPoints=2]
  *        The number of decimal points to round the passed value to, or two.
  *
+ * @param [roundingMode=BigNumber.ROUND_HALF_UP]
+ *        The required rounding mode. Defaults to ROUND_HALF_UP (4).
+ *        See https://mikemcl.github.io/bignumber.js/#round-up for other rounding modes
+ *
  * @return {String} The rounded value.
  */
-VendNumber.round = function (value, decimalPoints) {
+VendNumber.round = function (value, decimalPoints = 2, roundingMode = BigNumber.ROUND_HALF_UP) {
   // Convert to VendNumber if not already.
   value = (value instanceof BigNumber) ? value : new VendNumber(value)
 
-  // 2dp by default.
-  decimalPoints = (typeof decimalPoints === 'number') ? decimalPoints : 2
-
-  return value.toFixed(decimalPoints)
+  return value.toFixed(decimalPoints, roundingMode)
 }
 
 /**
