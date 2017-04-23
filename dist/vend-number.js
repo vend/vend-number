@@ -19,6 +19,18 @@ var _bignumberJs = require('bignumber.js');
 
 var _bignumberJs2 = _interopRequireDefault(_bignumberJs);
 
+var ROUNDING_MODES = {
+  ROUND_UP: _bignumberJs2['default'].ROUND_UP,
+  ROUND_DOWN: _bignumberJs2['default'].ROUND_DOWN,
+  ROUND_CEIL: _bignumberJs2['default'].ROUND_CEIL,
+  ROUND_FLOOR: _bignumberJs2['default'].ROUND_FLOOR,
+  ROUND_HALF_UP: _bignumberJs2['default'].ROUND_HALF_UP,
+  ROUND_HALF_DOWN: _bignumberJs2['default'].ROUND_HALF_DOWN,
+  ROUND_HALF_EVEN: _bignumberJs2['default'].ROUND_HALF_EVEN,
+  ROUND_HALF_CEIL: _bignumberJs2['default'].ROUND_HALF_CEIL,
+  ROUND_HALF_FLOOR: _bignumberJs2['default'].ROUND_HALF_FLOOR
+};
+
 var VendNumber = (function (_BigNumber) {
   _inherits(VendNumber, _BigNumber);
 
@@ -52,20 +64,29 @@ var VendNumber = (function (_BigNumber) {
   }
 
   /**
-   * Quick convenience function for creating VendNumber instances. E.g. `vn(123)` is the same as `new VendNumber(123)`.
+   * Available rounding modes.
    *
-   * @method vn
-   * @static
-   *
-   * @param value {Number | String}
-   *        The value to make a VendNumber
-   *
-   * @return {VendNumber} A VendNumber instance for the given value
+   * @property ROUNDING_MODES
+   * @type {Object}
+   * @readOnly
    */
   return VendNumber;
 })(_bignumberJs2['default']);
 
 exports['default'] = VendNumber;
+VendNumber.ROUNDING_MODES = ROUNDING_MODES;
+
+/**
+ * Quick convenience function for creating VendNumber instances. E.g. `vn(123)` is the same as `new VendNumber(123)`.
+ *
+ * @method vn
+ * @static
+ *
+ * @param value {Number | String}
+ *        The value to make a VendNumber
+ *
+ * @return {VendNumber} A VendNumber instance for the given value
+ */
 VendNumber.vn = function (value) {
   return new VendNumber(value);
 };
@@ -90,7 +111,7 @@ VendNumber.vn = function (value) {
  */
 VendNumber.round = function (value) {
   var decimalPoints = arguments.length <= 1 || arguments[1] === undefined ? 2 : arguments[1];
-  var roundingMode = arguments.length <= 2 || arguments[2] === undefined ? _bignumberJs2['default'].ROUND_HALF_UP : arguments[2];
+  var roundingMode = arguments.length <= 2 || arguments[2] === undefined ? ROUNDING_MODES.ROUND_HALF_UP : arguments[2];
 
   // Convert to VendNumber if not already.
   value = value instanceof _bignumberJs2['default'] ? value : new VendNumber(value);
