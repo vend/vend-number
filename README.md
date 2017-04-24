@@ -90,10 +90,22 @@ add(3, multiply(4, 5)) // returns 23
 
 ### Rounding and formatting
 
-Round a value to a specified number of decimal points.
+Round a value to a specified number of decimal points. The default rounding mode is `ROUND_HALF_UP`, the 'Round Half
+Away From Zero' tie-breaking rule.
 
 ```js
 VendNumber.round(5.545333, 2) // "5.55"
+```
+
+#### Rounding modes
+
+You can specify any of the [Big Number rounding modes](http://mikemcl.github.io/bignumber.js/#round-up) to the `round`
+function. These are available via `VendNumber.ROUNDING_METHODS`.
+
+```js
+import VendNumber, { ROUNDING_METHODS } from 'vend-number'
+
+VendNumber.round(5.545333, 2, ROUNDING_METHODS.ROUND_DOWN) // "5.54"
 ```
 
 ### isFinite
@@ -114,7 +126,7 @@ VendNumber.isFinite('-123.456') // true
 
 Calculates the sum of all items in a collection based on a property name.
 
-Accepts the following parameters: 
+Accepts the following parameters:
 
   - `Array` an array of items to loop through.
   - `String` a property name to sum by.
