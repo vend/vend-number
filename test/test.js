@@ -1,7 +1,7 @@
 /*global require, describe, it */
 'use strict'
 
-import VendNumber, { vn, round, add, subtract, multiply, divide, isFinite, sumBy } from '../'
+import VendNumber, { vn, round, add, subtract, multiply, divide, isFinite, sumBy, ROUNDING_MODES } from '../'
 import BigNumber from 'bignumber.js'
 import { expect } from 'chai'
 
@@ -60,7 +60,7 @@ describe('VendNumber', () => {
 
   describe('#round', () => {
     /*
-     * Our round function uses the 'Round Half Away From Zero' tie-breaking rule.
+     * Our default round function uses ROUND_HALF_UP the 'Round Half Away From Zero' tie-breaking rule.
      *
      * For example (When rounding to 1 decimal place):
      *
@@ -170,6 +170,73 @@ describe('VendNumber', () => {
         expect(round(-1, 3)).to.equal('-1.000')
         expect(round(-1, 4)).to.equal('-1.0000')
         expect(round(-1, 5)).to.equal('-1.00000')
+      })
+    })
+
+    describe('rounding modes', () => {
+      describe('ROUND_UP', () => {
+        it('should round away from zero', () => {
+          expect(round(0.9, 0, ROUNDING_MODES.ROUND_UP)).to.equal('1')
+          expect(round(-0.9, 0, ROUNDING_MODES.ROUND_UP)).to.equal('-1')
+          expect(round(0.03169086, 3, ROUNDING_MODES.ROUND_UP)).to.equal('0.032')
+        })
+      })
+
+      describe('ROUND_DOWN', () => {
+        it('should round towards zero', () => {
+          expect(round(0.9, 0, ROUNDING_MODES.ROUND_DOWN)).to.equal('0')
+          expect(round(-0.9, 0, ROUNDING_MODES.ROUND_DOWN)).to.equal('-0')
+          expect(round(0.03169086, 3, ROUNDING_MODES.ROUND_DOWN)).to.equal('0.031')
+        })
+      })
+
+      describe('ROUND_CEIL', () => {
+        it('should round towards Infinity', () => {
+          expect(round(0.9028782, 4, ROUNDING_MODES.ROUND_CEIL)).to.equal('0.9029')
+          expect(round(-0.9028782, 4, ROUNDING_MODES.ROUND_CEIL)).to.equal('-0.9028')
+        })
+      })
+
+      describe('ROUND_FLOOR', () => {
+        it('should round towards -Infinity', () => {
+          expect(round(0.9028782, 4, ROUNDING_MODES.ROUND_FLOOR)).to.equal('0.9028')
+          expect(round(-0.9028782, 4, ROUNDING_MODES.ROUND_FLOOR)).to.equal('-0.9029')
+        })
+      })
+
+      describe('ROUND_HALF_UP', () => {
+        it('should round towards nearest neighbour and if equidistant, round away from zero', () => {
+          expect(round(5.5, 0, ROUNDING_MODES.ROUND_HALF_UP)).to.equal('6')
+          expect(round(5.55, 1, ROUNDING_MODES.ROUND_HALF_UP)).to.equal('5.6')
+          expect(round(-5.5, 0, ROUNDING_MODES.ROUND_HALF_UP)).to.equal('-6')
+        })
+      })
+
+      describe('ROUND_HALF_DOWN', () => {
+        it('should round towards nearest neighbour and if equidistant, round towards zero', () => {
+          expect(round(5.5, 0, ROUNDING_MODES.ROUND_HALF_DOWN)).to.equal('5')
+          expect(round(5.55, 1, ROUNDING_MODES.ROUND_HALF_DOWN)).to.equal('5.5')
+          expect(round(-5.5, 0, ROUNDING_MODES.ROUND_HALF_DOWN)).to.equal('-5')
+        })
+      })
+
+      describe('ROUND_HALF_EVEN', () => {
+        it('should round towards nearest neighbour and if equidistant, round towards nearest even neighbour', () => {
+          expect(round(-2.426346, 4, ROUNDING_MODES.ROUND_HALF_EVEN)).to.equal('-2.4263')
+          expect(round(0.3564473, 3, ROUNDING_MODES.ROUND_HALF_EVEN)).to.equal('0.356')
+        })
+      })
+
+      describe('ROUND_HALF_CEIL', () => {
+        it('should round towards nearest neighbour and if equidistant, round towards nearest Infinity', () => {
+          expect(round(76700.5, 0, ROUNDING_MODES.ROUND_HALF_CEIL)).to.equal('76701')
+        })
+      })
+
+      describe('ROUND_HALF_FLOOR', () => {
+        it('should round towards nearest neighbour and if equidistant, round towards nearest -Infinity', () => {
+          expect(round(76700.5, 0, ROUNDING_MODES.ROUND_HALF_FLOOR)).to.equal('76700')
+        })
       })
     })
   })

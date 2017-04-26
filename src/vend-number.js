@@ -5,6 +5,18 @@
 
 import BigNumber from 'bignumber.js'
 
+const ROUNDING_MODES = {
+  ROUND_UP: BigNumber.ROUND_UP,
+  ROUND_DOWN: BigNumber.ROUND_DOWN,
+  ROUND_CEIL: BigNumber.ROUND_CEIL,
+  ROUND_FLOOR: BigNumber.ROUND_FLOOR,
+  ROUND_HALF_UP: BigNumber.ROUND_HALF_UP,
+  ROUND_HALF_DOWN: BigNumber.ROUND_HALF_DOWN,
+  ROUND_HALF_EVEN: BigNumber.ROUND_HALF_EVEN,
+  ROUND_HALF_CEIL: BigNumber.ROUND_HALF_CEIL,
+  ROUND_HALF_FLOOR: BigNumber.ROUND_HALF_FLOOR
+}
+
 export default class VendNumber extends BigNumber {
   /**
    * Vend extension of BigNumber.
@@ -34,6 +46,15 @@ export default class VendNumber extends BigNumber {
 }
 
 /**
+ * Available rounding modes.
+ *
+ * @property ROUNDING_MODES
+ * @type {Object}
+ * @readOnly
+ */
+VendNumber.ROUNDING_MODES = ROUNDING_MODES
+
+/**
  * Quick convenience function for creating VendNumber instances. E.g. `vn(123)` is the same as `new VendNumber(123)`.
  *
  * @method vn
@@ -60,16 +81,17 @@ VendNumber.vn = function (value) {
  * @param [decimalPoints=2]
  *        The number of decimal points to round the passed value to, or two.
  *
+ * @param [roundingMode=BigNumber.ROUND_HALF_UP]
+ *        The required rounding mode. Defaults to ROUND_HALF_UP (4).
+ *        See https://mikemcl.github.io/bignumber.js/#round-up for other rounding modes
+ *
  * @return {String} The rounded value.
  */
-VendNumber.round = function (value, decimalPoints) {
+VendNumber.round = function (value, decimalPoints = 2, roundingMode = ROUNDING_MODES.ROUND_HALF_UP) {
   // Convert to VendNumber if not already.
   value = (value instanceof BigNumber) ? value : new VendNumber(value)
 
-  // 2dp by default.
-  decimalPoints = (typeof decimalPoints === 'number') ? decimalPoints : 2
-
-  return value.toFixed(decimalPoints)
+  return value.toFixed(decimalPoints, roundingMode)
 }
 
 /**
