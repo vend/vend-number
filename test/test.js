@@ -177,6 +177,7 @@ describe('VendNumber', () => {
       describe('ROUND_UP', () => {
         it('should round away from zero', () => {
           expect(round(0.9, 0, ROUNDING_MODES.ROUND_UP)).to.equal('1')
+          expect(round(-0.9, 0, ROUNDING_MODES.ROUND_UP)).to.equal('-1')
           expect(round(0.03169086, 3, ROUNDING_MODES.ROUND_UP)).to.equal('0.032')
         })
       })
@@ -184,6 +185,7 @@ describe('VendNumber', () => {
       describe('ROUND_DOWN', () => {
         it('should round towards zero', () => {
           expect(round(0.9, 0, ROUNDING_MODES.ROUND_DOWN)).to.equal('0')
+          expect(round(-0.9, 0, ROUNDING_MODES.ROUND_DOWN)).to.equal('-0')
           expect(round(0.03169086, 3, ROUNDING_MODES.ROUND_DOWN)).to.equal('0.031')
         })
       })
@@ -206,6 +208,7 @@ describe('VendNumber', () => {
         it('should round towards nearest neighbour and if equidistant, round away from zero', () => {
           expect(round(5.5, 0, ROUNDING_MODES.ROUND_HALF_UP)).to.equal('6')
           expect(round(5.55, 1, ROUNDING_MODES.ROUND_HALF_UP)).to.equal('5.6')
+          expect(round(-5.5, 0, ROUNDING_MODES.ROUND_HALF_UP)).to.equal('-6')
         })
       })
 
@@ -213,6 +216,7 @@ describe('VendNumber', () => {
         it('should round towards nearest neighbour and if equidistant, round towards zero', () => {
           expect(round(5.5, 0, ROUNDING_MODES.ROUND_HALF_DOWN)).to.equal('5')
           expect(round(5.55, 1, ROUNDING_MODES.ROUND_HALF_DOWN)).to.equal('5.5')
+          expect(round(-5.5, 0, ROUNDING_MODES.ROUND_HALF_DOWN)).to.equal('-5')
         })
       })
 
