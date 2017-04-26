@@ -103,9 +103,9 @@ You can specify any of the [Big Number rounding modes](http://mikemcl.github.io/
 function. These are available via `VendNumber.ROUNDING_METHODS`.
 
 ```js
-import VendNumber, { ROUNDING_METHODS } from 'vend-number'
+import VendNumber, { ROUNDING_MODES } from 'vend-number'
 
-VendNumber.round(5.545333, 2, ROUNDING_METHODS.ROUND_DOWN) // "5.54"
+VendNumber.round(5.545333, 2, ROUNDING_MODES.ROUND_DOWN) // "5.54"
 ```
 
 ### isFinite
