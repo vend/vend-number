@@ -40,7 +40,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "bignumber.js": "~4.0.0"
+    "bignumber.js": "https://github.com/Ka0o0/bignumber.js#623d87200964618f2e6f3ceafa5d6ab979c47753"
   },
   "devDependencies": {
     "babel": "~5.8.23",
