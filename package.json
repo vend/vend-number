@@ -3,6 +3,7 @@
   "version": "3.0.1",
   "description": "A collection of utility methods for floating point Number operations",
   "main": "dist/vend-number.js",
+  "types": "./index.d.ts",
   "repository": {
     "type": "git",
     "url": "git://github.com/vend/vend-number.git"
