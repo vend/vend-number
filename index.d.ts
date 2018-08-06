@@ -56,6 +56,15 @@ declare module 'vend-number' {
       ROUND_HALF_CEIL: RoundingMode,
       ROUND_HALF_FLOOR: RoundingMode
     }
+
+    static vn(value?: Stringable): VendNumber
+    static round(value?: Stringable, decimalPoints?: number, roundingMode?: RoundingMode): string
+    static add(...values: Stringable[]): number
+    static subtract(...values: Stringable[]): number
+    static multiply(...values: Stringable[]): number
+    static divide(...values: Stringable[]): number
+    static sumBy<T, K extends keyof T>(collection: T[], property: K, decimalPoints: number): string
+    static isFinite(value: number | string | BigNumber): boolean
   }
 
   export function vn(value?: Stringable): VendNumber
