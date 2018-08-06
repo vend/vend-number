@@ -66,4 +66,13 @@ declare module 'vend-number' {
     static sumBy<T, K extends keyof T>(collection: T[], property: K, decimalPoints: number): string
     static isFinite(value: number | string | BigNumber): boolean
   }
+
+  export function vn(value?: Stringable): VendNumber
+  export function round(value?: Stringable, decimalPoints?: number, roundingMode?: RoundingMode): string
+  export function add(...values: Stringable[]): number
+  export function subtract(...values: Stringable[]): number
+  export function multiply(...values: Stringable[]): number
+  export function divide(...values: Stringable[]): number
+  export function sumBy<T, K extends keyof T>(collection: T[], property: K, decimalPoints: number): string
+  export function isFinite(value: number | string | BigNumber): boolean
 }
