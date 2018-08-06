@@ -1,6 +1,6 @@
 {
   "name": "vend-number",
-  "version": "3.1.2",
+  "version": "3.1.3",
   "description": "A collection of utility methods for floating point Number operations",
   "main": "dist/vend-number.js",
   "types": "./index.d.ts",
