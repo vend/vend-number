@@ -3,7 +3,7 @@
  */
 'use strict'
 
-import BigNumber from 'bignumber.js'
+const BigNumber = require('bignumber.js')
 
 const ROUNDING_MODES = {
   ROUND_UP: BigNumber.ROUND_UP,
@@ -17,7 +17,7 @@ const ROUNDING_MODES = {
   ROUND_HALF_FLOOR: BigNumber.ROUND_HALF_FLOOR
 }
 
-export default class VendNumber extends BigNumber {
+class VendNumber extends BigNumber {
   /**
    * Vend extension of BigNumber.
    *
@@ -45,6 +45,8 @@ export default class VendNumber extends BigNumber {
   }
 }
 
+module.exports = VendNumber
+
 /**
  * Available rounding modes.
  *
@@ -52,7 +54,7 @@ export default class VendNumber extends BigNumber {
  * @type {Object}
  * @readOnly
  */
-VendNumber.ROUNDING_MODES = ROUNDING_MODES
+module.exports.ROUNDING_MODES = ROUNDING_MODES
 
 /**
  * Quick convenience function for creating VendNumber instances. E.g. `vn(123)` is the same as `new VendNumber(123)`.
@@ -65,7 +67,7 @@ VendNumber.ROUNDING_MODES = ROUNDING_MODES
  *
  * @return {VendNumber} A VendNumber instance for the given value
  */
-VendNumber.vn = function (value) {
+module.exports.vn = function (value) {
   return new VendNumber(value)
 }
 
@@ -87,7 +89,7 @@ VendNumber.vn = function (value) {
  *
  * @return {String} The rounded value.
  */
-VendNumber.round = function (value, decimalPoints = 2, roundingMode = ROUNDING_MODES.ROUND_HALF_UP) {
+module.exports.round = function (value, decimalPoints = 2, roundingMode = ROUNDING_MODES.ROUND_HALF_UP) {
   // Convert to VendNumber if not already.
   value = (value instanceof BigNumber) ? value : new VendNumber(value)
 
@@ -100,7 +102,7 @@ VendNumber.round = function (value, decimalPoints = 2, roundingMode = ROUNDING_M
  * @method add
  * @static
  */
-VendNumber.add = function (...values) {
+module.exports.add = function (...values) {
   return _executeOperation('plus', values)
 }
 
@@ -110,7 +112,7 @@ VendNumber.add = function (...values) {
  * @method subtract
  * @static
  */
-VendNumber.subtract = function (...values) {
+module.exports.subtract = function (...values) {
   return _executeOperation('minus', values)
 }
 
@@ -120,7 +122,7 @@ VendNumber.subtract = function (...values) {
  * @method multiply
  * @static
  */
-VendNumber.multiply = function (...values) {
+module.exports.multiply = function (...values) {
   return _executeOperation('times', values)
 }
 
@@ -130,7 +132,7 @@ VendNumber.multiply = function (...values) {
  * @method divide
  * @static
  */
-VendNumber.divide = function (...values) {
+module.exports.divide = function (...values) {
   return _executeOperation('dividedBy', values)
 }
 
@@ -150,7 +152,7 @@ VendNumber.divide = function (...values) {
  *
  * @return {Number} the total of all items in the collection based on property.
  */
-VendNumber.sumBy = function (collection, property, decimalPoints) {
+module.exports.sumBy = function (collection, property, decimalPoints) {
   let sum = 0
   if (collection && collection instanceof Array) {
     collection.forEach(item => {
@@ -243,6 +245,6 @@ const SafeBN = BigNumber.another({ ERRORS: false })
  * @return {Boolean} true if the value is a finite numeric value (can be Number, String, BigNumber) or false if it is
  *         non-numeric or non-finite
  */
-VendNumber.isFinite = function (value) {
+module.exports.isFinite = function (value) {
   return SafeBN(value).isFinite()
 }
