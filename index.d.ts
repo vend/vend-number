@@ -64,7 +64,7 @@ declare module 'vend-number' {
     static multiply(...values: Stringable[]): number
     static divide(...values: Stringable[]): number
     static sumBy<T, K extends keyof T>(collection: T[], property: K, decimalPoints: number): string
-    static isFinite(value: number | string | BigNumber): boolean
+    static isFinite(value: null | number | string | BigNumber): boolean
   }
 
   export function vn(value?: Stringable): VendNumber
@@ -74,5 +74,5 @@ declare module 'vend-number' {
   export function multiply(...values: Stringable[]): number
   export function divide(...values: Stringable[]): number
   export function sumBy<T, K extends keyof T>(collection: T[], property: K, decimalPoints: number): string
-  export function isFinite(value: number | string | BigNumber): boolean
+  export function isFinite(value: null | number | string | BigNumber): boolean
 }
