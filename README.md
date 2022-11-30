@@ -1,12 +1,9 @@
 vend-number
 ----------
 
-[![travis][travis-image]][travis-url]
 [![npm][npm-image]][npm-url]
 [![js-standard-style][standard-style-image]][standard-style-url]
 
-[travis-image]: https://img.shields.io/travis/vend/vend-number.svg?style=flat
-[travis-url]: https://travis-ci.org/vend/vend-number
 [npm-image]: https://img.shields.io/npm/v/vend-number.svg?style=flat
 [npm-url]: https://npmjs.org/package/vend-number
 [standard-style-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat
