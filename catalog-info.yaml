@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  annotations:
+    github.com/project-slug: vend/vend-number
+  description: "A collection of utility methods for floating point Number operations"
+  name: vend-number
+spec:
+  lifecycle: production
+  owner: tba
+  type: library
