@@ -1,4 +1,4 @@
-import BigNumber from 'bignumber.js'
+import BigNumber from './bignumber.js'
 
 export const ROUNDING_MODES = {
   ROUND_UP: BigNumber.ROUND_UP,
