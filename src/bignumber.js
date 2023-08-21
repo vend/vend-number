@@ -1226,6 +1226,7 @@ function constructorFactory(config) {
      */
     function round( x, sd, rm, r ) {
         var d, i, j, k, n, ni, rd,
+            processed = false,
             xc = x.c,
             pows10 = POWS_TEN;
 
@@ -1238,7 +1239,7 @@ function constructorFactory(config) {
             // d is the number of digits of n.
             // i is the index of rd within n including leading zeros.
             // j is the actual index of rd within n (if < 0, rd is a leading zero).
-            out: {
+            {
 
                 // Get the number of digits of the first element of xc.
                 for ( d = 1, k = xc[0]; k >= 10; k /= 10, d++ );
@@ -1266,7 +1267,7 @@ function constructorFactory(config) {
                             i %= LOG_BASE;
                             j = i - LOG_BASE + 1;
                         } else {
-                            break out;
+                            processed = true;
                         }
                     } else {
                         n = k = xc[ni];
@@ -1286,95 +1287,97 @@ function constructorFactory(config) {
                     }
                 }
 
-                r = r || sd < 0 ||
+                if (!processed) {
+                    r = r || sd < 0 ||
 
-                // Are there any non-zero digits after the rounding digit?
-                // The expression  n % pows10[ d - j - 1 ]  returns all digits of n to the right
-                // of the digit at j, e.g. if n is 908714 and j is 2, the expression gives 714.
-                  xc[ni + 1] != null || ( j < 0 ? n : n % pows10[ d - j - 1 ] );
+                    // Are there any non-zero digits after the rounding digit?
+                    // The expression  n % pows10[ d - j - 1 ]  returns all digits of n to the right
+                    // of the digit at j, e.g. if n is 908714 and j is 2, the expression gives 714.
+                    xc[ni + 1] != null || ( j < 0 ? n : n % pows10[ d - j - 1 ] );
 
-                r = rm < 4
-                  ? ( rd || r ) && ( rm == 0 || rm == ( x.s < 0 ? 3 : 2 ) )
-                  : rd > 5 || rd == 5 && ( rm == 4 || r || rm == 6 &&
+                    r = rm < 4
+                    ? ( rd || r ) && ( rm == 0 || rm == ( x.s < 0 ? 3 : 2 ) )
+                    : rd > 5 || rd == 5 && ( rm == 4 || r || rm == 6 &&
 
-                    // Check whether the digit to the left of the rounding digit is odd.
-                    ( ( i > 0 ? j > 0 ? n / pows10[ d - j ] : 0 : xc[ni - 1] ) % 10 ) & 1 ||
-                      rm == ( x.s < 0 ? 8 : 7 ) );
+                        // Check whether the digit to the left of the rounding digit is odd.
+                        ( ( i > 0 ? j > 0 ? n / pows10[ d - j ] : 0 : xc[ni - 1] ) % 10 ) & 1 ||
+                        rm == ( x.s < 0 ? 8 : 7 ) );
 
-                if ( sd < 1 || !xc[0] ) {
-                    xc.length = 0;
+                    if ( sd < 1 || !xc[0] ) {
+                        xc.length = 0;
 
+                        if (r) {
+
+                            // Convert sd to decimal places.
+                            sd -= x.e + 1;
+
+                            // 1, 0.1, 0.01, 0.001, 0.0001 etc.
+                            xc[0] = pows10[ ( LOG_BASE - sd % LOG_BASE ) % LOG_BASE ];
+                            x.e = -sd || 0;
+                        } else {
+
+                            // Zero.
+                            xc[0] = x.e = 0;
+                        }
+
+                        return x;
+                    }
+
+                    // Remove excess digits.
+                    if ( i == 0 ) {
+                        xc.length = ni;
+                        k = 1;
+                        ni--;
+                    } else {
+                        xc.length = ni + 1;
+                        k = pows10[ LOG_BASE - i ];
+
+                        // E.g. 56700 becomes 56000 if 7 is the rounding digit.
+                        // j > 0 means i > number of leading zeros of n.
+                        xc[ni] = j > 0 ? mathfloor( n / pows10[ d - j ] % pows10[j] ) * k : 0;
+                    }
+
+                    // Round up?
                     if (r) {
 
-                        // Convert sd to decimal places.
-                        sd -= x.e + 1;
+                        for ( ; ; ) {
 
-                        // 1, 0.1, 0.01, 0.001, 0.0001 etc.
-                        xc[0] = pows10[ ( LOG_BASE - sd % LOG_BASE ) % LOG_BASE ];
-                        x.e = -sd || 0;
-                    } else {
+                            // If the digit to be rounded up is in the first element of xc...
+                            if ( ni == 0 ) {
 
-                        // Zero.
-                        xc[0] = x.e = 0;
-                    }
+                                // i will be the length of xc[0] before k is added.
+                                for ( i = 1, j = xc[0]; j >= 10; j /= 10, i++ );
+                                j = xc[0] += k;
+                                for ( k = 1; j >= 10; j /= 10, k++ );
 
-                    return x;
-                }
+                                // if i != k the length has increased.
+                                if ( i != k ) {
+                                    x.e++;
+                                    if ( xc[0] == BASE ) xc[0] = 1;
+                                }
 
-                // Remove excess digits.
-                if ( i == 0 ) {
-                    xc.length = ni;
-                    k = 1;
-                    ni--;
-                } else {
-                    xc.length = ni + 1;
-                    k = pows10[ LOG_BASE - i ];
-
-                    // E.g. 56700 becomes 56000 if 7 is the rounding digit.
-                    // j > 0 means i > number of leading zeros of n.
-                    xc[ni] = j > 0 ? mathfloor( n / pows10[ d - j ] % pows10[j] ) * k : 0;
-                }
-
-                // Round up?
-                if (r) {
-
-                    for ( ; ; ) {
-
-                        // If the digit to be rounded up is in the first element of xc...
-                        if ( ni == 0 ) {
-
-                            // i will be the length of xc[0] before k is added.
-                            for ( i = 1, j = xc[0]; j >= 10; j /= 10, i++ );
-                            j = xc[0] += k;
-                            for ( k = 1; j >= 10; j /= 10, k++ );
-
-                            // if i != k the length has increased.
-                            if ( i != k ) {
-                                x.e++;
-                                if ( xc[0] == BASE ) xc[0] = 1;
+                                break;
+                            } else {
+                                xc[ni] += k;
+                                if ( xc[ni] != BASE ) break;
+                                xc[ni--] = 0;
+                                k = 1;
                             }
-
-                            break;
-                        } else {
-                            xc[ni] += k;
-                            if ( xc[ni] != BASE ) break;
-                            xc[ni--] = 0;
-                            k = 1;
                         }
                     }
+
+                    // Remove trailing zeros.
+                    for ( i = xc.length; xc[--i] === 0; xc.pop() );
                 }
 
-                // Remove trailing zeros.
-                for ( i = xc.length; xc[--i] === 0; xc.pop() );
-            }
+                // Overflow? Infinity.
+                if ( x.e > MAX_EXP ) {
+                    x.c = x.e = null;
 
-            // Overflow? Infinity.
-            if ( x.e > MAX_EXP ) {
-                x.c = x.e = null;
-
-            // Underflow? Zero.
-            } else if ( x.e < MIN_EXP ) {
-                x.c = [ x.e = 0 ];
+                // Underflow? Zero.
+                } else if ( x.e < MIN_EXP ) {
+                    x.c = [ x.e = 0 ];
+                }
             }
         }
 
