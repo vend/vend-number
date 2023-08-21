@@ -485,43 +485,43 @@ describe('VendNumber', () => {
 
   describe('#isFinite', () => {
     it('should return false for non-numeric values', () => {
-      expect(isFinite(undefined)).to.be.false
-      expect(isFinite(null)).to.be.false
-      expect(isFinite(NaN)).to.be.false
-      expect(isFinite(false)).to.be.false
-      expect(isFinite('')).to.be.false
-      expect(isFinite('not a number')).to.be.false
+      expect(isFinite(undefined)).toBe(false)
+      expect(isFinite(null)).toBe(false)
+      expect(isFinite(NaN)).toBe(false)
+      expect(isFinite(false)).toBe(false)
+      expect(isFinite('')).toBe(false)
+      expect(isFinite('not a number')).toBe(false)
     })
 
     it('should return true for finite numbers represented as strings', () => {
-      expect(isFinite('0')).to.be.true
-      expect(isFinite('123.45')).to.be.true
-      expect(isFinite('-123.45')).to.be.true
-      expect(isFinite(Number.MAX_VALUE.toString())).to.be.true
-      expect(isFinite(Number.MIN_VALUE.toString())).to.be.true
+      expect(isFinite('0')).toBe(true)
+      expect(isFinite('123.45')).toBe(true)
+      expect(isFinite('-123.45')).toBe(true)
+      expect(isFinite(Number.MAX_VALUE.toString())).toBe(true)
+      expect(isFinite(Number.MIN_VALUE.toString())).toBe(true)
     })
 
     it('should return true for finite number values', () => {
-      expect(isFinite(0)).to.be.true
-      expect(isFinite(123.45)).to.be.true
-      expect(isFinite(-123.45)).to.be.true
-      expect(isFinite(Number.MAX_VALUE)).to.be.true
-      expect(isFinite(Number.MIN_VALUE)).to.be.true
+      expect(isFinite(0)).toBe(true)
+      expect(isFinite(123.45)).toBe(true)
+      expect(isFinite(-123.45)).toBe(true)
+      expect(isFinite(Number.MAX_VALUE)).toBe(true)
+      expect(isFinite(Number.MIN_VALUE)).toBe(true)
     })
 
     it('should return true for finite VendNumber values', () => {
-      expect(isFinite(vn(0))).to.be.true
-      expect(isFinite(vn(123.45))).to.be.true
-      expect(isFinite(vn(-123.45))).to.be.true
-      expect(isFinite(vn(Number.MAX_VALUE))).to.be.true
-      expect(isFinite(vn(Number.MIN_VALUE))).to.be.true
+      expect(isFinite(vn(0))).toBe(true)
+      expect(isFinite(vn(123.45))).toBe(true)
+      expect(isFinite(vn(-123.45))).toBe(true)
+      expect(isFinite(vn(Number.MAX_VALUE))).toBe(true)
+      expect(isFinite(vn(Number.MIN_VALUE))).toBe(true)
     })
 
     it('should return false for Infinity or -Infinity', () => {
-      expect(isFinite(Infinity)).to.be.false
-      expect(isFinite(Number.POSITIVE_INFINITY)).to.be.false
-      expect(isFinite(-Infinity)).to.be.false
-      expect(isFinite(Number.NEGATIVE_INFINITY)).to.be.false
+      expect(isFinite(Infinity)).toBe(false)
+      expect(isFinite(Number.POSITIVE_INFINITY)).toBe(false)
+      expect(isFinite(-Infinity)).toBe(false)
+      expect(isFinite(Number.NEGATIVE_INFINITY)).toBe(false)
     })
   })
 })

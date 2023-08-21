@@ -111,7 +111,7 @@ VendNumber.add = add
  * @method subtract
  * @static
  */
-export function subtract(...values) {
+export function subtract (...values) {
   return _executeOperation('minus', values)
 }
 
@@ -213,7 +213,7 @@ function _executeOperation (operation, values) {
   values.splice(0, 1)
 
   // Convert to VendNumber
-  _ifValid(returnValue, () => returnValue = new VendNumber(returnValue))
+  _ifValid(returnValue, () => { returnValue = new VendNumber(returnValue) })
 
   values.forEach(value => {
     value = parseFloat(value)
@@ -228,7 +228,7 @@ function _executeOperation (operation, values) {
 
   let operationAnswer
   // Set the final result of the calculation as a standard Number.
-  _ifValid(returnValue, () => operationAnswer = Number(returnValue.toString()))
+  _ifValid(returnValue, () => { operationAnswer = Number(returnValue.toString()) })
 
   if (operationAnswer) {
     return operationAnswer
@@ -252,7 +252,7 @@ const SafeBN = BigNumber.another({ ERRORS: false })
  * @return {Boolean} true if the value is a finite numeric value (can be Number, String, BigNumber) or false if it is
  *         non-numeric or non-finite
  */
-export function isFinite(value) {
+export function isFinite (value) {
   return SafeBN(value).isFinite()
 }
 
