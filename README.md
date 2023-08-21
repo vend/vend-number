@@ -139,24 +139,10 @@ VendNumber.sumBy([{ a: 1.4222 }, { a: 2.1115 }], 'a', 3) // 3.534
 
 ## Contributing
 
-### Build
-
-```js
-npm run build
-```
-
 ### Test
 
 ```js
-npm test
-```
-
-### Watch
-
-To watch for changes, build them and run the tests:
-
-```js
-npm run watch
+yarn test
 ```
 
 ## License
