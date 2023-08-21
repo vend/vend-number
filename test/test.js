@@ -1,24 +1,10 @@
-/*global require, describe, it */
-'use strict'
-
-import VendNumber, { vn, round, add, subtract, multiply, divide, isFinite, sumBy, ROUNDING_MODES } from '../'
+import VendNumber, { vn, round, add, subtract, multiply, divide, isFinite, sumBy, ROUNDING_MODES } from '../src/vend-number.js'
 import BigNumber from 'bignumber.js'
-import { expect } from 'chai'
+import { describe, expect, it } from 'vitest'
 
 describe('VendNumber', () => {
   const testVendNumberValue = vn(10)
   const testNumberValue = 2
-
-  it('should support being imported by require()', () => {
-    const VendNum = require('../')
-    expect(VendNum).to.equal(VendNumber)
-    expect(VendNum.vn).to.equal(vn)
-    expect(VendNum.round).to.equal(round)
-    expect(VendNum.add).to.equal(add)
-    expect(VendNum.subtract).to.equal(subtract)
-    expect(VendNum.multiply).to.equal(multiply)
-    expect(VendNum.divide).to.equal(divide)
-  })
 
   it('should be a constructor function', () => {
     expect(VendNumber).to.be.a('function')

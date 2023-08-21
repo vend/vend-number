@@ -1,11 +1,6 @@
-/**
- * @module vend-number
- */
-'use strict'
-
 import BigNumber from 'bignumber.js'
 
-const ROUNDING_MODES = {
+export const ROUNDING_MODES = {
   ROUND_UP: BigNumber.ROUND_UP,
   ROUND_DOWN: BigNumber.ROUND_DOWN,
   ROUND_CEIL: BigNumber.ROUND_CEIL,
@@ -65,9 +60,11 @@ VendNumber.ROUNDING_MODES = ROUNDING_MODES
  *
  * @return {VendNumber} A VendNumber instance for the given value
  */
-VendNumber.vn = function (value) {
+export function vn (value) {
   return new VendNumber(value)
 }
+
+VendNumber.vn = vn
 
 /**
  * Rounds a value to a specified number of decimal points.
@@ -87,12 +84,14 @@ VendNumber.vn = function (value) {
  *
  * @return {String} The rounded value.
  */
-VendNumber.round = function (value, decimalPoints = 2, roundingMode = ROUNDING_MODES.ROUND_HALF_UP) {
+export function round (value, decimalPoints = 2, roundingMode = ROUNDING_MODES.ROUND_HALF_UP) {
   // Convert to VendNumber if not already.
   value = (value instanceof BigNumber) ? value : new VendNumber(value)
 
   return value.toFixed(decimalPoints, roundingMode)
 }
+
+VendNumber.round = round
 
 /**
  * Adds a list of values.
@@ -100,9 +99,11 @@ VendNumber.round = function (value, decimalPoints = 2, roundingMode = ROUNDING_M
  * @method add
  * @static
  */
-VendNumber.add = function (...values) {
+export function add (...values) {
   return _executeOperation('plus', values)
 }
+
+VendNumber.add = add
 
 /**
  * Subtracts a list of values.
@@ -110,9 +111,11 @@ VendNumber.add = function (...values) {
  * @method subtract
  * @static
  */
-VendNumber.subtract = function (...values) {
+export function subtract(...values) {
   return _executeOperation('minus', values)
 }
+
+VendNumber.subtract = subtract
 
 /**
  * Multiplies a list of values.
@@ -120,9 +123,11 @@ VendNumber.subtract = function (...values) {
  * @method multiply
  * @static
  */
-VendNumber.multiply = function (...values) {
+export function multiply (...values) {
   return _executeOperation('times', values)
 }
+
+VendNumber.multiply = multiply
 
 /**
  * Divides a list of values.
@@ -130,9 +135,11 @@ VendNumber.multiply = function (...values) {
  * @method divide
  * @static
  */
-VendNumber.divide = function (...values) {
+export function divide (...values) {
   return _executeOperation('dividedBy', values)
 }
+
+VendNumber.divide = divide
 
 /**
  * Returns the sum of all items in the collection based on property.
@@ -150,17 +157,19 @@ VendNumber.divide = function (...values) {
  *
  * @return {Number} the total of all items in the collection based on property.
  */
-VendNumber.sumBy = function (collection, property, decimalPoints) {
+export function sumBy (collection, property, decimalPoints) {
   let sum = 0
   if (collection && collection instanceof Array) {
     collection.forEach(item => {
-      if (item && VendNumber.isFinite(item[property])) {
-        sum = VendNumber.add(sum, item[property])
+      if (item && isFinite(item[property])) {
+        sum = add(sum, item[property])
       }
     })
   }
-  return VendNumber.round(sum, decimalPoints)
+  return round(sum, decimalPoints)
 }
+
+VendNumber.sumBy = sumBy
 
 /**
  * Executes VendNumber calculation operation on an array of values.
@@ -243,6 +252,8 @@ const SafeBN = BigNumber.another({ ERRORS: false })
  * @return {Boolean} true if the value is a finite numeric value (can be Number, String, BigNumber) or false if it is
  *         non-numeric or non-finite
  */
-VendNumber.isFinite = function (value) {
+export function isFinite(value) {
   return SafeBN(value).isFinite()
 }
+
+VendNumber.isFinite = isFinite
