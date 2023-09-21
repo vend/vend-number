@@ -1,5 +1,5 @@
 import VendNumber, { vn, round, add, subtract, multiply, divide, isFinite, sumBy, ROUNDING_MODES } from '../src/vend-number.js'
-import BigNumber from '../src/bignumber.js'
+import BigNumber from 'bignumber.js'
 import { describe, expect, it } from 'vitest'
 
 describe('VendNumber', () => {

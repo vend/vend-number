@@ -19,7 +19,9 @@
     "bignumber.js"
   ],
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "bignumber.js": "5.0.0"
+  },
   "devDependencies": {
     "standard": "^17.1.0",
     "vitest": "^0.34.2"
@@ -31,8 +33,7 @@
     "ignore": [
       "coverage/**",
       "dist/**",
-      "node_modules/**",
-      "src/bignumber.js"
+      "node_modules/**"
     ]
   }
 }
