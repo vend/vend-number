@@ -42,6 +42,18 @@ declare module 'vend-number' {
     EUCLID = 9
   }
 
+  export const ROUNDING_MODES = {
+    ROUND_UP: RoundingMode.ROUND_UP,
+    ROUND_DOWN: RoundingMode.ROUND_DOWN,
+    ROUND_CEIL: RoundingMode.ROUND_CEIL,
+    ROUND_FLOOR: RoundingMode.ROUND_FLOOR,
+    ROUND_HALF_UP: RoundingMode.ROUND_HALF_UP,
+    ROUND_HALF_DOWN: RoundingMode.ROUND_HALF_DOWN,
+    ROUND_HALF_EVEN: RoundingMode.ROUND_HALF_EVEN,
+    ROUND_HALF_CEIL: RoundingMode.ROUND_HALF_CEIL,
+    ROUND_HALF_FLOOR: RoundingMode.ROUND_HALF_FLOOR,
+  } as const
+
   export default class VendNumber extends BigNumber {
     constructor (value?: Stringable)
 
