@@ -20,7 +20,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "bignumber.js": "5.0.0"
+    "bignumber.js": "9.1.2"
   },
   "devDependencies": {
     "standard": "^17.1.0",
