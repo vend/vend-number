@@ -7,5 +7,5 @@ metadata:
   name: vend-number
 spec:
   lifecycle: production
-  owner: tba
+  owner: orphaned
   type: library
